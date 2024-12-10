@@ -13,4 +13,8 @@ class Node
   def <=>(node)
     data <=> node.data
   end
+
+  def to_s
+    "Data: #{data}; Left: #{left}; Right: #{right}"
+  end
 end

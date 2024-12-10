@@ -1,6 +1,10 @@
 require_relative 'lib/tree'
 
-array = [98, 34, 9, 222, 90, 90, 22, 19, 23]
+array = [3, 2, 1]
 tree = Tree.new(array)
 
-p tree.root
+sorted = tree.mergesort(array).uniq
+p sorted
+node = tree.build_tree(sorted)
+
+tree.pretty_print

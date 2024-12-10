@@ -4,26 +4,22 @@ class Tree
 
   def initialize(array)
     sorted_array = mergesort(array).uniq
-    @root = build_tree(sorted_array)
+    @root = build_tree(sorted_array, 0, sorted_array.length - 1)
   end
 
-  def build_tree(array)
+  def build_tree(array, start = 0, last = array.length - 1)
+    return nil if start > last
     # Calculate mid index
     # Create root node with this value
     # Traverse the left side recursively
-    first = 0
-    last = array.length - 1
-    mid = first + (last - first) / 2
-    return nil if first > last
-
+    mid = start + (last - start) / 2
     root = Node.new(array[mid])
-    root.left = build_tree(array[first..mid-1])
-    root.right = build_tree(array[mid+1..last])
+    root.left = build_tree(array, start, mid - 1)
+    root.right = build_tree(array, mid + 1, last)
 
     return root
   end
 
-  private
   def mergesort(array)
     # Sort the left half
     # Sort the right half
@@ -39,7 +35,7 @@ class Tree
 
     return merging(left_array, right_array)
   end
-
+ 
   def merging(left_array, right_array)
     i = 0
     j = 0
@@ -71,4 +67,10 @@ class Tree
 
     return array
   end
+
+  def pretty_print(node = @root, prefix = '', is_left = true)
+    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+  end 
 end
