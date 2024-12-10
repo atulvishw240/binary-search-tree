@@ -20,6 +20,28 @@ class Tree
     return root
   end
 
+  def insert(value)
+    node = Node.new(value)
+    prev = nil
+    start = root
+
+    until start.nil?
+      if node > start
+        prev = start
+        start = start.right
+      else
+        prev = start
+        start = start.left
+      end
+    end
+
+    if node > prev
+      prev.right = node
+    else
+      prev.left = node
+    end
+  end
+
   def mergesort(array)
     # Sort the left half
     # Sort the right half
