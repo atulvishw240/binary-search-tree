@@ -1,8 +1,26 @@
+require_relative 'node'
 class Tree
   attr_accessor :root
 
   def initialize(array)
-    @root = build_tree(array)
+    sorted_array = mergesort(array).uniq
+    @root = build_tree(sorted_array)
+  end
+
+  def build_tree(array)
+    # Calculate mid index
+    # Create root node with this value
+    # Traverse the left side recursively
+    first = 0
+    last = array.length - 1
+    mid = first + (last - first) / 2
+    return nil if first > last
+
+    root = Node.new(array[mid])
+    root.left = build_tree(array[first..mid-1])
+    root.right = build_tree(array[mid+1..last])
+
+    return root
   end
 
   private

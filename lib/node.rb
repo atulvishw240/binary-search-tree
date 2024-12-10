@@ -1,7 +1,8 @@
+# Implementation of Node
 class Node
   include Comparable
 
-  attr_accessor :data
+  attr_accessor :data, :left, :right
 
   def initialize(data)
     @data = data
