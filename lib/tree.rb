@@ -20,33 +20,24 @@ class Tree
     return root
   end
 
-  def insert(value)
-    node = Node.new(value)
-    prev = nil
-    start = root
+  def insert(key, curr_node = root)
+    return Node.new(key) if curr_node.nil?
 
-    until start.nil?
-      if node > start
-        prev = start
-        start = start.right
-      else
-        prev = start
-        start = start.left
-      end
-    end
+    return curr_node if curr_node.data == key
 
-    if node > prev
-      prev.right = node
+    if key > curr_node.data
+      curr_node.right = insert(key, curr_node.right)
     else
-      prev.left = node
+      curr_node.left = insert(key, curr_node.left)
     end
+
+    return curr_node
   end
 
   def is_left?(node)
     return false if node.left.nil?
 
     true
-    end
   end
 
   def is_right?(node)
