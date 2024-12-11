@@ -42,6 +42,19 @@ class Tree
     end
   end
 
+  def is_left?(node)
+    return false if node.left.nil?
+
+    true
+    end
+  end
+
+  def is_right?(node)
+    return false if node.right.nil?
+
+    true
+  end
+
   def mergesort(array)
     # Sort the left half
     # Sort the right half
