@@ -60,6 +60,22 @@ class Tree
     curr_node
   end
 
+  def find(key)
+    curr_node = root
+
+    while true
+      return nil if curr_node.nil?
+
+      if key > curr_node.data
+        curr_node = curr_node.right
+      elsif key < curr_node.data
+        curr_node = curr_node.left
+      else
+        return curr_node
+      end
+    end
+  end
+
   def is_left?(node)
     return false if node.left.nil?
 
