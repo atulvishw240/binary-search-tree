@@ -18,3 +18,8 @@ tree.insert(23)
 tree.insert(36)
 
 tree.pretty_print
+
+tree.delete(36)
+tree.delete(14)
+
+tree.pretty_print

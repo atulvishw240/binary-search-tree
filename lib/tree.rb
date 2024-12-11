@@ -34,6 +34,32 @@ class Tree
     return curr_node
   end
 
+  def delete(key, curr_node = root)
+    # Base case
+    return curr_node if curr_node.nil?
+
+    # If key to be searched is in a subtree
+    if (key > curr_node.data)
+      curr_node.right = delete(key, curr_node.right)
+    elsif key < curr_node.data
+      curr_node.left = delete(key, curr_node.left)
+    else
+      # If root matches with the given key
+
+      # Cases when root has 0 children or
+      # only right child
+      return curr_node.right if curr_node.left.nil?
+
+      return curr_node.left if curr_node.right.nil?
+
+      succ = get_successor(curr_node)
+      curr_node.key = succ.key
+      curr_node.right = delete(curr_node.right, succ.data)
+    end
+
+    curr_node
+  end
+
   def is_left?(node)
     return false if node.left.nil?
 
