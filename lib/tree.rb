@@ -126,6 +126,54 @@ class Tree
     result unless block_given?
   end
 
+  def height(node)
+    # Why this code broke because of a simple return statement (return 0 if node.nil?)
+    # return 0 if node.nil?
+
+    # height = 0
+    # left = height(node.left)
+    # right = height(node.right)
+
+    # if left > right
+    #   height = left
+    # else
+    #   height = right
+    # end
+
+    # return height + 1
+    return -1 if node.nil?
+
+    height = 0
+    left = height(node.left)
+    right = height(node.right)
+
+    if left > right
+      height = left
+    else
+      height = right
+    end
+
+    return height + 1
+  end
+
+  def depth(node)
+    depth = 0
+    curr_node = root
+    until curr_node.nil?
+      if node.data > curr_node.data
+        curr_node = curr_node.right
+        depth += 1
+      elsif node.data < curr_node.data
+        curr_node = curr_node.left
+        depth += 1
+      else
+        return depth
+      end
+    end
+
+    -1
+  end
+
   def is_left?(node)
     return false if node.left.nil?
 
