@@ -81,7 +81,7 @@ class Tree
   # Implementation : Recursion or Iteration
   # If no block is given Then return array of values
   # You will want to use an array acting as a queue to keep track of the child nodes that you have yet to traverse
-  def level_order(&my_block)
+  def level_order
     queue = [@root]
     result = []
     until queue.empty?
@@ -90,6 +90,39 @@ class Tree
       queue << node.left unless node.left.nil?
       queue << node.right unless node.right.nil?
     end
+    result unless block_given?
+  end
+
+  def inorder(root)
+    result = []
+    return if root.nil?
+
+    inorder(root.left)
+    block_given? ? yield(root) : result << root.data
+    inorder(root.right)
+
+    result unless block_given?
+  end
+
+  def preorder(root)
+    result = []
+    return if root.nil?
+
+    block_given? ? yield(root) : result << root.data
+    preorder(root.left)
+    preorder(root.right)
+
+    result unless block_given?
+  end
+
+  def postorder(root)
+    result = []
+    return if root.nil?
+
+    postorder(root.left)
+    postorder(root.right)
+    block_given? ? yield(root) : result << root.data
+
     result unless block_given?
   end
 
