@@ -104,23 +104,21 @@ class Tree
     result unless block_given?
   end
 
-  def preorder(root)
-    result = []
+  def preorder(root, result = [])
     return if root.nil?
 
     block_given? ? yield(root) : result << root.data
-    preorder(root.left)
-    preorder(root.right)
+    preorder(root.left, result)
+    preorder(root.right, result)
 
     result unless block_given?
   end
 
-  def postorder(root)
-    result = []
+  def postorder(root, result = [])
     return if root.nil?
 
-    postorder(root.left)
-    postorder(root.right)
+    postorder(root.left, result)
+    postorder(root.right, result)
     block_given? ? yield(root) : result << root.data
 
     result unless block_given?
