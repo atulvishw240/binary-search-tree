@@ -174,6 +174,19 @@ class Tree
     -1
   end
 
+  def balanced?
+    root_node = root
+    height_left_subtree = height(root_node.left)
+    height_right_subtree = height(root_node.right)
+    balance_factor = height_left_subtree - height_right_subtree
+
+    if (-1..1).include?(balance_factor)
+      true
+    else
+      false
+    end
+  end
+
   def is_left?(node)
     return false if node.left.nil?
 
