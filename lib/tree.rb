@@ -93,13 +93,13 @@ class Tree
     result unless block_given?
   end
 
-  def inorder(root)
-    result = []
+  def inorder(root, result = [])
+    # result = []
     return if root.nil?
 
-    inorder(root.left)
+    inorder(root.left, result)
     block_given? ? yield(root) : result << root.data
-    inorder(root.right)
+    inorder(root.right, result)
 
     result unless block_given?
   end
@@ -185,6 +185,13 @@ class Tree
     else
       false
     end
+  end
+
+  def rebalance
+    root_node = root
+    sorted_array = inorder(root_node)
+    p sorted_array
+    @root = build_tree(sorted_array)
   end
 
   def is_left?(node)
