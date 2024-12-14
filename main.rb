@@ -20,3 +20,6 @@ tree.delete(2)
 tree.delete(30)
 
 tree.pretty_print
+
+level_order { |node| puts node }
+tree.level_order(&my_block)

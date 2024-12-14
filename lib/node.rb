@@ -10,11 +10,11 @@ class Node
     @right = nil
   end
 
-  def <=>(node)
-    data <=> node.data
+  def <=>(other)
+    data <=> other.data
   end
 
   def to_s
-    "Data: #{data}; Left: #{left}; Right: #{right}"
+    puts self.data
   end
 end

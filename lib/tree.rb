@@ -9,6 +9,7 @@ class Tree
 
   def build_tree(array, start = 0, last = array.length - 1)
     return nil if start > last
+
     # Calculate mid index
     # Create root node with this value
     # Traverse the left side recursively
@@ -17,7 +18,7 @@ class Tree
     root.left = build_tree(array, start, mid - 1)
     root.right = build_tree(array, mid + 1, last)
 
-    return root
+    root
   end
 
   def insert(key, curr_node = root)
@@ -74,6 +75,22 @@ class Tree
         return curr_node
       end
     end
+  end
+
+  # Traverse the tree in bfs order and yield each node to the provided block
+  # Implementation : Recursion or Iteration
+  # If no block is given Then return array of values
+  # You will want to use an array acting as a queue to keep track of the child nodes that you have yet to traverse
+  def level_order(&my_block)
+    queue = [@root]
+    result = []
+    until queue.empty?
+      node = queue.shift
+      block_given? ? yield(node) : result << node.data
+      queue << node.left unless node.left.nil?
+      queue << node.right unless node.right.nil?
+    end
+    result unless block_given?
   end
 
   def is_left?(node)
