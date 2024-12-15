@@ -7,10 +7,10 @@ p array.sort.uniq
 
 # Create Tree
 tree = Tree.new(array)
-# Preorder traversal
 
 tree.pretty_print
 
+# Inorder, Preorder & Postorder traversal
 tree.inorder(tree.root) do |node|
   print "#{node.data} "
 end
@@ -29,18 +29,22 @@ end
 
 puts ""
 
+# Unbalance the tree
 tree.insert(120)
 tree.insert(150)
 tree.insert(180)
 tree.insert(200)
 
+# Print tree and check if it's balanced
 tree.pretty_print
 puts tree.balanced?
 
+# Rebalance the tree
 tree.rebalance
 puts tree.balanced?
 tree.pretty_print
 
+# Inorder, Preorder & Postorder traversal
 tree.inorder(tree.root) do |node|
   print "#{node.data} "
 end
