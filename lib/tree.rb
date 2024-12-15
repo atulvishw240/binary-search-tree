@@ -1,4 +1,6 @@
 require_relative 'node'
+
+# Implementation of TREE
 class Tree
   attr_accessor :root
 
@@ -93,33 +95,33 @@ class Tree
     result unless block_given?
   end
 
-  def inorder(root, result = [])
+  def inorder(root, result = [], &block)
     # result = []
     return if root.nil?
 
-    inorder(root.left, result)
-    block_given? ? yield(root) : result << root.data
-    inorder(root.right, result)
+    inorder(root.left, result, &block)
+    block_given? ? block.call(root) : result << root.data
+    inorder(root.right, result, &block)
 
     result unless block_given?
   end
 
-  def preorder(root, result = [])
+  def preorder(root, result = [], &block)
     return if root.nil?
 
-    block_given? ? yield(root) : result << root.data
-    preorder(root.left, result)
-    preorder(root.right, result)
+    block_given? ? block.call(root) : result << root.data
+    preorder(root.left, result, &block)
+    preorder(root.right, result, &block)
 
     result unless block_given?
   end
 
-  def postorder(root, result = [])
+  def postorder(root, result = [], &block)
     return if root.nil?
 
-    postorder(root.left, result)
-    postorder(root.right, result)
-    block_given? ? yield(root) : result << root.data
+    postorder(root.left, result, &block)
+    postorder(root.right, result, &block)
+    block_given? ? block.call(root) : result << root.data
 
     result unless block_given?
   end
